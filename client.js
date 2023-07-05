@@ -109,7 +109,7 @@
     )
       .then((res) => res.json())
       .then((res) => {
-        return res.files['jay-music.json'].raw_url;
+        return res.files['youga.json'].raw_url;
       });
   }
 
