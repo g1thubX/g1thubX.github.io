@@ -14,7 +14,8 @@ function main() {
   return getAllData()
     .then((d) => {
       const data = { list: d, errData: d.filter((item) => !item.songInfo) };
-      if (d.length < 360) {
+      if (d.length < 6) {
+        console.log(d.length);
         console.log('歌曲数据不全，不推送');
         throw new Error('歌曲数据不全');
       }
@@ -38,11 +39,11 @@ main();
 
 /** 将数据更新到 gist */
 function updateData(data) {
-  return octokit.request('PATCH /gists/cb11eaafbe69fc7ba63c38f9ff40e0d9', {
+  return octokit.request('PATCH /gists/fcc722f7fbd46f4ad0eeb573187a1b83', {
     gist_id: 'GIST_ID',
     description: new Date(),
     files: {
-      'jay-music.json': {
+      'youga.json': {
         content: JSON.stringify(data),
       },
     },
@@ -71,7 +72,7 @@ function getAllSongs() {
   const list = [];
   return new Promise((resolve) => {
     function loop(pageNo = 1) {
-      miguMusic('singer/songs', { id: 112, pageNo })
+      miguMusic('singer/songs', { id: 17847, pageNo })
         .then((data) => {
           list.push(...(data.list || []));
           if (data.totalPage < 20) {
